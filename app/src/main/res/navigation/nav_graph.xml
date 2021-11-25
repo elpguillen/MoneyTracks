@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph.xml">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/menuListFragment">
 
+    <fragment
+        android:id="@+id/menuListFragment"
+        android:name="com.chiu.moneytracks.MenuListFragment"
+        android:label="fragment_menu_list"
+        tools:layout="@layout/fragment_menu_list" >
+        <action
+            android:id="@+id/action_menuListFragment_to_expensesFragment"
+            app:destination="@id/expensesFragment" />
+        <action
+            android:id="@+id/action_menuListFragment_to_incomeFragment"
+            app:destination="@id/incomeFragment" />
+        <action
+            android:id="@+id/action_menuListFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/expensesFragment"
+        android:name="com.chiu.moneytracks.ExpensesFragment"
+        android:label="fragment_expenses"
+        tools:layout="@layout/fragment_expenses" />
+    <fragment
+        android:id="@+id/incomeFragment"
+        android:name="com.chiu.moneytracks.IncomeFragment"
+        android:label="fragment_income"
+        tools:layout="@layout/fragment_income" />
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.chiu.moneytracks.ResultsFragment"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" />
 </navigation>
