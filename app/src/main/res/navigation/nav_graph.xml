@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menuListFragment"
-        android:name="com.chiu.moneytracks.MenuListFragment"
+        android:name="com.chiu.moneytracks.fragments.MenuListFragment"
         android:label="fragment_menu_list"
         tools:layout="@layout/fragment_menu_list" >
         <action
@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_menuListFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
+        <action
+            android:id="@+id/action_menuListFragment_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/expensesFragment"
@@ -35,4 +38,8 @@
         android:name="com.chiu.moneytracks.ResultsFragment"
         android:label="fragment_results"
         tools:layout="@layout/fragment_results" />
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.chiu.moneytracks.fragments.AddItemFragment"
+        android:label="AddItemFragment" />
 </navigation>

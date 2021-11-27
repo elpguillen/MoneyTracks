@@ -2,7 +2,11 @@
     <string name="app_name">MoneyTracks</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="income_button_text">Earnings</string>
-    <string name="expenses_button_text">Expenses</string>
-    <string name="results_button_text">Results</string>
+    <string name="earnings">Earnings</string>
+    <string name="expenses">Expenses</string>
+    <string name="results">Results</string>
+    <string name="submit">Submit</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="amount">Amount</string>
 </resources>

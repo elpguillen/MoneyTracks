@@ -10,19 +10,21 @@
         android:id="@+id/income_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/income_button_text"
+        android:layout_margin="8dp"
+        android:text="@string/earnings"
         app:layout_constraintBottom_toTopOf="@+id/expenses_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/expenses_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/expenses_button_text"
+        android:layout_margin="8dp"
+        android:text="@string/expenses"
         app:layout_constraintBottom_toTopOf="@+id/results_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -33,10 +35,23 @@
         android:id="@+id/results_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/results_button_text"
+        android:layout_margin="8dp"
+        android:text="@string/results"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/expenses_button" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addIncomeItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:contentDescription="Add new item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>
