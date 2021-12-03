@@ -25,21 +25,25 @@
     </fragment>
     <fragment
         android:id="@+id/expensesFragment"
-        android:name="com.chiu.moneytracks.ExpensesFragment"
+        android:name="com.chiu.moneytracks.fragments.ExpensesFragment"
         android:label="fragment_expenses"
         tools:layout="@layout/fragment_expenses" />
     <fragment
         android:id="@+id/incomeFragment"
-        android:name="com.chiu.moneytracks.IncomeFragment"
+        android:name="com.chiu.moneytracks.fragments.IncomeFragment"
         android:label="fragment_income"
         tools:layout="@layout/fragment_income" />
     <fragment
         android:id="@+id/resultsFragment"
-        android:name="com.chiu.moneytracks.ResultsFragment"
+        android:name="com.chiu.moneytracks.fragments.ResultsFragment"
         android:label="fragment_results"
         tools:layout="@layout/fragment_results" />
     <fragment
         android:id="@+id/addItemFragment"
         android:name="com.chiu.moneytracks.fragments.AddItemFragment"
-        android:label="AddItemFragment" />
+        android:label="AddItemFragment" >
+        <action
+            android:id="@+id/action_addItemFragment_to_menuListFragment"
+            app:destination="@id/menuListFragment" />
+    </fragment>
 </navigation>

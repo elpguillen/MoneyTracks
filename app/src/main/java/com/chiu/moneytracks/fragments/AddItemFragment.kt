@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.chiu.moneytracks.IncomeApplication
+import com.chiu.moneytracks.IncomeViewModel
+import com.chiu.moneytracks.IncomeViewModelFactory
 import com.chiu.moneytracks.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.chiu.moneytracks.data.NetIncome
+import com.chiu.moneytracks.databinding.FragmentAddItemBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -18,16 +20,21 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class AddItemFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private val viewModel: IncomeViewModel by activityViewModels {
+        IncomeViewModelFactory(
+            (activity?.application as IncomeApplication).database
+                .incomeDao()
+        )
+    }
+
+    lateinit var incomeItem: NetIncome
+
+    private var _binding: FragmentAddItemBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +42,44 @@ class AddItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_item, container, false)
+        _binding = FragmentAddItemBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddItemFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddItemFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.addItemSubmitButton.setOnClickListener {
+            addNewItem()
+        }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        _binding = null
+    }
+
+
+    private fun isEntryValid(): Boolean {
+        return viewModel.isEntryValid(
+                binding.itemDateText.text.toString(),
+                binding.itemDescriptionText.text.toString(),
+                binding.itemAmountText.text.toString()
+        )
+    }
+
+    private fun addNewItem() {
+        if (isEntryValid()) {
+            viewModel.addNewItem(
+                binding.itemDateText.text.toString(),
+                binding.itemDescriptionText.text.toString(),
+                binding.itemAmountText.text.toString()
+            )
+
+            val action = AddItemFragmentDirections.actionAddItemFragmentToMenuListFragment()
+            findNavController().navigate(action)
+        }
+    }
+
 }
