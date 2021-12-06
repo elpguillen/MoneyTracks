@@ -8,6 +8,9 @@ class IncomeApplication : Application() {
 
     val database: NetIncomeRoomDatabase by lazy { NetIncomeRoomDatabase.getDatabase(this) }
 
+    // used to determine what radio button is selected at time of submission
+    var typeSubmission: Int = InvConstants.INCOME_TYPE
+
     /*var database: NetIncomeRoomDatabase? = null
 
     fun getDatabase(): NetIncomeRoomDatabase? {

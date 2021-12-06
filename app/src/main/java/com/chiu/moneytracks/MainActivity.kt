@@ -2,6 +2,8 @@ package com.chiu.moneytracks
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.RadioButton
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
@@ -28,4 +30,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    fun onSubmitIncomeClicked(view: View) {
+
+        val incomeApplication = (application as IncomeApplication)
+
+
+        if (view is RadioButton) {
+            var isViewChecked = view.isChecked
+
+            when (view.id) {
+                R.id.income_radio_button -> if (isViewChecked) incomeApplication.typeSubmission = InvConstants.INCOME_TYPE
+                else -> incomeApplication.typeSubmission = InvConstants.EXPENSE_TYPE
+            }
+        }
+    }
+
 }
