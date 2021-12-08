@@ -49,7 +49,7 @@ class ExpensesFragment : Fragment() {
         binding.expenseRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.expenseRecyclerView.adapter = expenseAdapter
 
-        viewModel.allItems.observe(this.viewLifecycleOwner) {
+        viewModel.expenseItems.observe(this.viewLifecycleOwner) {
             items -> items.let {
                 expenseAdapter.submitList(it)
             }

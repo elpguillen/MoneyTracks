@@ -51,7 +51,7 @@ class ResultsFragment : Fragment() {
         binding.resultsRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.resultsRecyclerView.adapter = resultsAdapter
         binding.percentSavedLabel.text = "0.0%"
-        binding.netIncomeLabel.text = "0.00"
+        binding.netIncomeLabel.text = "0.0"
 
         viewModel.allItems.observe(this.viewLifecycleOwner) {
             items -> items.let {

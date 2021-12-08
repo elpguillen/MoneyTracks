@@ -50,9 +50,8 @@ class IncomeFragment : Fragment() {
         binding.incomeRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.incomeRecyclerView.adapter = incomeAdapter
 
-        viewModel.allItems.observe(this.viewLifecycleOwner) {
+        viewModel.incomeItems.observe(this.viewLifecycleOwner) {
             items -> items.let {
-                if (it == null) Log.d("HEELLLLLLLO", "adapter list is empty for some reason.")
                 incomeAdapter.submitList(it)
             }
         }

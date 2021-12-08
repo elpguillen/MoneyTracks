@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.chiu.moneytracks.IncomeApplication
+import com.chiu.moneytracks.IncomeViewModel
+import com.chiu.moneytracks.IncomeViewModelFactory
 import com.chiu.moneytracks.databinding.FragmentMenuListBinding
 
 /**
@@ -18,6 +22,12 @@ class MenuListFragment : Fragment() {
 
     private var _binding: FragmentMenuListBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: IncomeViewModel by activityViewModels {
+        IncomeViewModelFactory(
+            (activity?.application as IncomeApplication).database.incomeDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +63,10 @@ class MenuListFragment : Fragment() {
         binding.addIncomeItemButton.setOnClickListener {
             val action = MenuListFragmentDirections.actionMenuListFragmentToAddItemFragment()
             this.findNavController().navigate(action)
+        }
+
+        binding.deleteButton.setOnClickListener {
+            viewModel.clearDatabase()
         }
 
     }
