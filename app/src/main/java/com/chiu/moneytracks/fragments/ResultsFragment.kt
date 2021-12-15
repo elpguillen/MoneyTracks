@@ -50,8 +50,15 @@ class ResultsFragment : Fragment() {
 
         binding.resultsRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.resultsRecyclerView.adapter = resultsAdapter
+
+        // initialize percent label and income label to default values to show a temp value
+        // in case not initialized later
         binding.percentSavedLabel.text = "0.0%"
         binding.netIncomeLabel.text = "0.0"
+
+        viewModel.totalSum.observe(this.viewLifecycleOwner) {
+            binding.netIncomeLabel.text = it.toString()
+        }
 
         viewModel.allItems.observe(this.viewLifecycleOwner) {
             items -> items.let {

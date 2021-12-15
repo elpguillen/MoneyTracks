@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.chiu.moneytracks.*
 import com.chiu.moneytracks.data.NetIncome
 import com.chiu.moneytracks.databinding.FragmentAddItemBinding
+import kotlin.math.absoluteValue
 
 /**
  * A simple [Fragment] subclass.
@@ -78,11 +79,14 @@ class AddItemFragment : Fragment() {
             var description = binding.itemDescriptionText.text.toString()
             var amount = binding.itemAmountText.text.toString()
 
+            var amountNum = amount.toDouble().absoluteValue
+
             if (incomeApplication.typeSubmission == InvConstants.EXPENSE_TYPE) {
-                var amountNum = amount.toDouble() * (-1.0)
-                amount = amountNum.toString()
+                amountNum *= (-1.0)
+                //var amountNum = amount.toDouble() * (-1.0)
             }
 
+            amount = amountNum.toString()
             viewModel.addNewItem(date, description, amount)
 
             val action = AddItemFragmentDirections.actionAddItemFragmentToMenuListFragment()

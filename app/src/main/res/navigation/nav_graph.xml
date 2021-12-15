@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_menuListFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
+        <action
+            android:id="@+id/action_menuListFragment_to_optionsFragment"
+            app:destination="@id/optionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/expensesFragment"
@@ -46,4 +49,8 @@
             android:id="@+id/action_addItemFragment_to_menuListFragment"
             app:destination="@id/menuListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.chiu.moneytracks.fragments.OptionsFragment"
+        android:label="OptionsFragment" />
 </navigation>

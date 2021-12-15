@@ -42,10 +42,10 @@ interface IncomeDao {
     fun getTotalSum(): Flow<Double>
 
     @Query("SELECT SUM(amount) FROM net_income WHERE amount > 0")
-    fun getIncomeSum(): Double
+    fun getIncomeSum(): Flow<Double>
 
     @Query("SELECT SUM(amount) FROM net_income WHERE amount < 0")
-    fun getExpenseSum(): Double
+    fun getExpenseSum(): Flow<Double>
 
     @Query("SELECT * FROM net_income WHERE description LIKE :phrase")
     fun findByDescription(phrase: String): Flow<List<NetIncome>>

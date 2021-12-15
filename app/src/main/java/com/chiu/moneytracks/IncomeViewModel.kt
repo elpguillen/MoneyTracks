@@ -12,29 +12,15 @@ class IncomeViewModel(private val dao: IncomeDao) : ViewModel() {
     val incomeItems: LiveData<List<NetIncome>> = dao.getIncomeItems().asLiveData()
     val expenseItems: LiveData<List<NetIncome>> = dao.getExpenseItems().asLiveData()
 
-    //val totalSum: LiveData<Double> = dao.getTotalSum().asLiveData()
+    val dateFilter: Boolean = false
+
+    val totalSum: LiveData<Double> = dao.getTotalSum().asLiveData()
 
     /* Inserts a new item into the database */
     fun addNewItem(itemDate: String, itemDescription: String, itemAmount: String) {
         val newIncomeItem = getNewIncomeEntry(itemDate, itemDescription, itemAmount)
         insertItem(newIncomeItem)
     }
-    /* Clears all the items in the database*/
-    fun clearDatabase() {
-        deleteAllItems()
-    }
-
-    /*private fun totalIncome() {
-        viewModelScope.launch {
-            dao.getIncomeSum()
-        }
-    }
-
-    fun totalExpense() {
-        viewModelScope.launch {
-            dao.getExpenseSum()
-        }
-    }*/
 
     /* Inserts a new item into the database */
     private fun insertItem(incomeItem: NetIncome) {
@@ -78,6 +64,11 @@ class IncomeViewModel(private val dao: IncomeDao) : ViewModel() {
         }
 
         return true
+    }
+
+    /* Clears all the items in the database*/
+    fun clearDatabase() {
+        deleteAllItems()
     }
 
 }

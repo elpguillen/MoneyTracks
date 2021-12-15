@@ -10,4 +10,11 @@
     <string name="description">Description</string>
     <string name="amount">Amount</string>
     <string name="delete_database">Clear Data</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="delete_question">Are you sure you want to clear the database?</string>
+    <string name="options">Options</string>
+    <string name="after_chosen_day">After</string>
+    <string name="before_chosen_day">Before</string>
+    <string name="at_chosen_day">At</string>
 </resources>
