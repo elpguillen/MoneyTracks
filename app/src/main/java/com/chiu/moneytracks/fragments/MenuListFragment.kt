@@ -13,6 +13,10 @@ import com.chiu.moneytracks.IncomeViewModelFactory
 import com.chiu.moneytracks.R
 import com.chiu.moneytracks.databinding.FragmentMenuListBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.util.concurrent.ThreadLocalRandom
 
 /**
  * A simple [Fragment] subclass.
@@ -47,6 +51,7 @@ class MenuListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind()
+        addRandomItems()
     }
 
     /**
@@ -99,5 +104,34 @@ class MenuListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun addRandomItems() {
+        // date, description, amount
+        var numItems: Int = 0
+
+        viewModel.numItems.observe(this.viewLifecycleOwner) {
+            numItems = it
+        }
+
+        for (i in numItems..30) {
+            // get a random date
+            val startDate = LocalDate.of(2000, 1, 1).toEpochDay()
+            val endDate = LocalDate.of(2025, 1, 1).toEpochDay()
+
+            val randomDateLong = ThreadLocalRandom.current().nextLong(startDate, endDate)
+            val randomDate = LocalDate.ofEpochDay(randomDateLong)
+
+            //all descriptions will be the same for simplicity
+            val description = "Randomly generated item"
+
+            // get random amount
+            val minVal = -2000
+            val maxVal = 10000
+
+            val randomAmount = ThreadLocalRandom.current().nextInt(minVal, maxVal)
+
+            viewModel.addNewItem(randomDate.toString(), description, randomAmount.toString())
+        }
     }
 }

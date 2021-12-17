@@ -3,7 +3,9 @@ package com.chiu.moneytracks
 import androidx.lifecycle.*
 import com.chiu.moneytracks.data.IncomeDao
 import com.chiu.moneytracks.data.NetIncome
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class IncomeViewModel(private val dao: IncomeDao) : ViewModel() {
@@ -12,9 +14,10 @@ class IncomeViewModel(private val dao: IncomeDao) : ViewModel() {
     val incomeItems: LiveData<List<NetIncome>> = dao.getIncomeItems().asLiveData()
     val expenseItems: LiveData<List<NetIncome>> = dao.getExpenseItems().asLiveData()
 
-    val dateFilter: Boolean = false
+    lateinit var allDateFilteredItems: LiveData<List<NetIncome>>
 
     val totalSum: LiveData<Double> = dao.getTotalSum().asLiveData()
+    val numItems: LiveData<Int> = dao.getNumItems().asLiveData()
 
     /* Inserts a new item into the database */
     fun addNewItem(itemDate: String, itemDescription: String, itemAmount: String) {
@@ -26,6 +29,22 @@ class IncomeViewModel(private val dao: IncomeDao) : ViewModel() {
     private fun insertItem(incomeItem: NetIncome) {
         viewModelScope.launch {
             dao.insert(incomeItem)
+        }
+    }
+
+    // methods below will be responsible for filtering data
+    fun getItemsByDateFilter(date: String = "2022-01-01", filterOption: Int = 4): LiveData<List<NetIncome>> {
+            val items =  when (filterOption) {
+                InvConstants.AFTER_DAY_CHOSEN ->  dao.getItemsAfterDate(date).asLiveData()
+                InvConstants.BEFORE_DAY_CHOSEN -> dao.getItemsBeforeDate(date).asLiveData()
+                else -> dao.getItemsAtDate(date).asLiveData()
+            }
+            return items
+    }
+
+    fun applyDateFilter(date: String, filterOption: Int) {
+        viewModelScope.launch {
+            allDateFilteredItems = getItemsByDateFilter(date, filterOption)
         }
     }
 

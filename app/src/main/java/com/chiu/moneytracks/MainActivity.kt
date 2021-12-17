@@ -1,5 +1,6 @@
 package com.chiu.moneytracks
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -32,9 +33,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     fun onSubmitIncomeClicked(view: View) {
-
         val incomeApplication = (application as IncomeApplication)
-
 
         if (view is RadioButton) {
             var isViewChecked = view.isChecked
@@ -45,5 +44,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
     }
+
+    /* fun onDateFilterClick(view: View) {
+        val sharedPref = this?.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE)
+
+        if (view is RadioButton) {
+            var isViewChecked = view.isChecked
+
+            when (view.id) {
+                R.id.at_day_button -> with (sharedPref.edit()) {
+                    putInt(getString(R.string.date_filter_at_state), )
+                }
+            }
+        }
+    } */
 
 }

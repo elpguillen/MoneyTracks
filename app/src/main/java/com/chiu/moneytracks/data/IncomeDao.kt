@@ -50,4 +50,7 @@ interface IncomeDao {
     @Query("SELECT * FROM net_income WHERE description LIKE :phrase")
     fun findByDescription(phrase: String): Flow<List<NetIncome>>
 
+    @Query("SELECT COUNT(id) FROM net_income")
+    fun getNumItems(): Flow<Int>
+
 }

@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:checked="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/date_label_option"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -42,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/date_switch_option"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/date_radio_group"
@@ -63,21 +65,24 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:checked="true"
-            android:text="@string/at_chosen_day"/>
+            android:text="@string/at_chosen_day"
+            android:visibility="invisible" />
 
         <RadioButton
             android:id="@+id/after_day_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/after_chosen_day"/>
+            android:text="@string/after_chosen_day"
+            android:visibility="invisible" />
 
         <RadioButton
             android:id="@+id/before_day_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="@string/before_chosen_day"/>
+            android:text="@string/before_chosen_day"
+            android:visibility="invisible" />
 
     </RadioGroup>
 
