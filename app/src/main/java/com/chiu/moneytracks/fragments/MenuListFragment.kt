@@ -3,14 +3,18 @@ package com.chiu.moneytracks.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.chiu.moneytracks.IncomeApplication
-import com.chiu.moneytracks.IncomeViewModel
-import com.chiu.moneytracks.IncomeViewModelFactory
-import com.chiu.moneytracks.R
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.chiu.moneytracks.*
+import com.chiu.moneytracks.adapters.MenuListAdapter
+import com.chiu.moneytracks.databinding.FragmentMenuGridListBinding
 import com.chiu.moneytracks.databinding.FragmentMenuListBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.time.Instant
@@ -26,8 +30,11 @@ import java.util.concurrent.ThreadLocalRandom
 
 class MenuListFragment : Fragment() {
 
-    private var _binding: FragmentMenuListBinding? = null
+    //private var _binding: FragmentMenuListBinding? = null
+    private var _binding: FragmentMenuGridListBinding? = null
     private val binding get() = _binding!!
+
+    private var menuItems: MutableList<String> = mutableListOf()
 
     private val viewModel: IncomeViewModel by activityViewModels {
         IncomeViewModelFactory(
@@ -37,21 +44,44 @@ class MenuListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initializeMenu()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMenuListBinding.inflate(inflater, container, false)
+        //_binding = FragmentMenuListBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
+        _binding = FragmentMenuGridListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bind()
-        addRandomItems()
+        //bind()
+
+        val menuAdapter = MenuListAdapter({
+            // based on string/button pressed choose correct path to go to next
+            var action: NavDirections //= MenuListFragmentDirections.actionMenuListFragmentToResultsFragment()
+
+            if (it == getString(R.string.delete_database)) {
+                showConfirmationDialog()
+            } else {
+                action = getNavigationAction(it)
+                view.findNavController().navigate(action)
+            }
+            //view.findNavController().navigate(action)
+        })
+
+        binding.menuGridRecyclerView.layoutManager =
+            GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
+        binding.menuGridRecyclerView.adapter = menuAdapter
+
+        InvConstants.menu.let { (binding.menuGridRecyclerView.adapter as MenuListAdapter).submitList(it) }
+
+        //addRandomItems()
     }
 
     /**
@@ -70,6 +100,19 @@ class MenuListFragment : Fragment() {
     }
 
     private fun bind() {
+        binding.menuGridRecyclerView.layoutManager =
+            GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun initializeMenu() {
+        menuItems.add(getString(R.string.earnings))
+        menuItems.add(getString(R.string.expenses))
+        menuItems.add(getString(R.string.results))
+        menuItems.add(getString(R.string.delete_database))
+        menuItems.add(getString(R.string.options))
+    }
+
+    /*private fun bind() {
         binding.incomeButton.setOnClickListener {
             val action = MenuListFragmentDirections.actionMenuListFragmentToIncomeFragment()
             this.findNavController().navigate(action)
@@ -98,6 +141,15 @@ class MenuListFragment : Fragment() {
             // move to OptionsFragment
             val action = MenuListFragmentDirections.actionMenuListFragmentToOptionsFragment()
             this.findNavController().navigate(action)
+        }
+    }*/
+
+    private fun getNavigationAction(menuOption: String): NavDirections{
+        return when(menuOption) {
+            getString(R.string.earnings) -> MenuListFragmentDirections.actionMenuListFragmentToIncomeFragment()
+            getString(R.string.expenses) -> MenuListFragmentDirections.actionMenuListFragmentToExpensesFragment()
+            getString(R.string.results) -> MenuListFragmentDirections.actionMenuListFragmentToResultsFragment()
+            else -> MenuListFragmentDirections.actionMenuListFragmentToOptionsFragment()
         }
     }
 
