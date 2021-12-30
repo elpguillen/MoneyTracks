@@ -19,6 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toEndOf="@+id/income_date_label"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/income_description_label"
         android:layout_width="0dp"
@@ -27,6 +34,14 @@
         app:layout_constraintEnd_toEndOf="@id/income_amount_label"
         app:layout_constraintHorizontal_weight="3"
         app:layout_constraintStart_toEndOf="@+id/income_date_label"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintStart_toEndOf="@+id/income_description_label"
+        app:layout_constraintEnd_toStartOf="@+id/income_amount_label"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chiu.moneytracks.*
@@ -49,9 +50,14 @@ class ResultsFragment : Fragment() {
         binding.resultsRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.resultsRecyclerView.adapter = resultsAdapter
 
+        val dividerItemDecoration = DividerItemDecoration(binding.resultsRecyclerView.context,
+            DividerItemDecoration.VERTICAL)
+
+        binding.resultsRecyclerView.addItemDecoration(dividerItemDecoration)
+
         // initialize percent label and income label to default values to show a temp value
         // in case not initialized later
-        binding.percentSavedLabel.text = "0.0%"
+        binding.percentSavedLabel.text = "Percent Saved: 0.0%"
         binding.netIncomeLabel.text = "0.0"
 
         viewModel.totalSum.observe(this.viewLifecycleOwner) {
@@ -67,6 +73,7 @@ class ResultsFragment : Fragment() {
 
             viewModel.applyDateFilter(prefDate, prefFilterState)
 
+            // Todo: handle situation when the list is empty
             viewModel.allDateFilteredItems.observe(this.viewLifecycleOwner) {
                 items -> items.let {
                     resultsAdapter.submitList(it)

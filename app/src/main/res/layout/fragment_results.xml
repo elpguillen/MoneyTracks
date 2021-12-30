@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:gravity="center"
         android:text="@string/date"
         app:layout_constraintEnd_toStartOf="@id/results_description_label"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -22,6 +23,7 @@
         android:id="@+id/results_description_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/description"
         app:layout_constraintEnd_toEndOf="@id/results_amount_label"
         app:layout_constraintHorizontal_weight="3"
@@ -32,6 +34,7 @@
         android:id="@+id/results_amount_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="right"
         android:text="@string/amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
@@ -50,16 +53,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/results_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="540dp"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/results_divider" />
 
+    <View
+        android:id="@+id/results_divider_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/results_recyclerView" />
+
     <TextView
         android:id="@+id/percent_saved_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toStartOf="@+id/net_income_label"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -71,6 +84,7 @@
         android:id="@+id/net_income_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/percent_saved_label"

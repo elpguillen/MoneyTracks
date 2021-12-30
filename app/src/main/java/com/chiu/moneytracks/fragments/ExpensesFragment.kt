@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chiu.moneytracks.IncomeApplication
 import com.chiu.moneytracks.IncomeViewModel
@@ -48,6 +49,11 @@ class ExpensesFragment : Fragment() {
 
         binding.expenseRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.expenseRecyclerView.adapter = expenseAdapter
+
+        val dividerItemDecoration = DividerItemDecoration(binding.expenseRecyclerView.context,
+            DividerItemDecoration.VERTICAL)
+
+        binding.expenseRecyclerView.addItemDecoration(dividerItemDecoration)
 
         viewModel.expenseItems.observe(this.viewLifecycleOwner) {
             items -> items.let {

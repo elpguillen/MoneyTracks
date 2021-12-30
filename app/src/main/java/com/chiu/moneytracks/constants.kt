@@ -11,6 +11,6 @@ object InvConstants {
     val AT_DAY_CHOSEN = 4
 
     val menu = listOf<String>(
-        "Earnings", "Expenses", "Results", "Clear Data", "Options"
+        "Earnings", "Expenses", "Results", "Clear Data", "Options", "Transaction"
     )
 }

@@ -24,4 +24,6 @@
     <string name="date_filter_after_state">com.chiu.moneytracks.DATE_FILTER_AFTER_STATE_KEY</string>
     <string name="date_filter_before_state">com.chiu.moneytracks.DATE_FILTER_BEFORE_STATE_KEY</string>
     <string name="date_filter_state_key">com.chiu.moneytracks.DATE_FILTER_STATE_KEY</string>
+    <string name="date_selected_to_add_key">com.chiu.moneytracks.DATE_SELECTED_KEY</string>
+    <string name="income_type_key">com.chiu.moneytracks.INCOME_TYPE_KEY</string>
 </resources>

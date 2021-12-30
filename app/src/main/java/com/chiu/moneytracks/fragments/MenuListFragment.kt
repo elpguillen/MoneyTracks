@@ -3,23 +3,19 @@ package com.chiu.moneytracks.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chiu.moneytracks.*
 import com.chiu.moneytracks.adapters.MenuListAdapter
 import com.chiu.moneytracks.databinding.FragmentMenuGridListBinding
-import com.chiu.moneytracks.databinding.FragmentMenuListBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneId
 import java.util.concurrent.ThreadLocalRandom
 
 /**
@@ -45,7 +41,8 @@ class MenuListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initializeMenu()
+        // hide the action bar (but hides for all so try again)
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
     override fun onCreateView(
@@ -104,14 +101,6 @@ class MenuListFragment : Fragment() {
             GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun initializeMenu() {
-        menuItems.add(getString(R.string.earnings))
-        menuItems.add(getString(R.string.expenses))
-        menuItems.add(getString(R.string.results))
-        menuItems.add(getString(R.string.delete_database))
-        menuItems.add(getString(R.string.options))
-    }
-
     /*private fun bind() {
         binding.incomeButton.setOnClickListener {
             val action = MenuListFragmentDirections.actionMenuListFragmentToIncomeFragment()
@@ -149,7 +138,8 @@ class MenuListFragment : Fragment() {
             getString(R.string.earnings) -> MenuListFragmentDirections.actionMenuListFragmentToIncomeFragment()
             getString(R.string.expenses) -> MenuListFragmentDirections.actionMenuListFragmentToExpensesFragment()
             getString(R.string.results) -> MenuListFragmentDirections.actionMenuListFragmentToResultsFragment()
-            else -> MenuListFragmentDirections.actionMenuListFragmentToOptionsFragment()
+            "Options" -> MenuListFragmentDirections.actionMenuListFragmentToOptionsFragment()
+            else -> MenuListFragmentDirections.actionMenuListFragmentToAddItemFragment()
         }
     }
 

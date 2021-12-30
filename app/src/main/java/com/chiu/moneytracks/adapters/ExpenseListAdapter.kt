@@ -38,7 +38,7 @@ class ExpenseListAdapter : ListAdapter<NetIncome, ExpenseListAdapter.ExpenseView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         return ExpenseViewHolder(
             ExpenseListItemBinding.inflate(
-                LayoutInflater.from(parent.context)
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }

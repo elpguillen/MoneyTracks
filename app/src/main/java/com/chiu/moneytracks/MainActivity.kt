@@ -33,30 +33,28 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     fun onSubmitIncomeClicked(view: View) {
-        val incomeApplication = (application as IncomeApplication)
+        //val incomeApplication = (application as IncomeApplication)
+
+        val sharedPref = this.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE) ?: return
 
         if (view is RadioButton) {
             var isViewChecked = view.isChecked
 
             when (view.id) {
-                R.id.income_radio_button -> if (isViewChecked) incomeApplication.typeSubmission = InvConstants.INCOME_TYPE
-                else -> incomeApplication.typeSubmission = InvConstants.EXPENSE_TYPE
+                R.id.income_radio_button -> if (isViewChecked) {
+                    //incomeApplication.typeSubmission = InvConstants.INCOME_TYPE
+                    with(sharedPref.edit()) {
+                        putInt(getString(R.string.income_type_key), InvConstants.INCOME_TYPE)
+                        apply()
+                    }
+                }
+                else ->
+                    with(sharedPref.edit()) {
+                        putInt(getString(R.string.income_type_key), InvConstants.EXPENSE_TYPE)
+                        apply()
+                    }
+                //incomeApplication.typeSubmission = InvConstants.EXPENSE_TYPE
             }
         }
     }
-
-    /* fun onDateFilterClick(view: View) {
-        val sharedPref = this?.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE)
-
-        if (view is RadioButton) {
-            var isViewChecked = view.isChecked
-
-            when (view.id) {
-                R.id.at_day_button -> with (sharedPref.edit()) {
-                    putInt(getString(R.string.date_filter_at_state), )
-                }
-            }
-        }
-    } */
-
 }
