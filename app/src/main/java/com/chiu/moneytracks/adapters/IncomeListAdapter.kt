@@ -15,7 +15,7 @@ class IncomeListAdapter : ListAdapter<NetIncome, IncomeListAdapter.IncomeViewHol
         viewType: Int
     ): IncomeViewHolder {
         return IncomeViewHolder(
-            IncomeListItemBinding.inflate(LayoutInflater.from(parent.context))
+            IncomeListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

@@ -1,11 +1,13 @@
 package com.chiu.moneytracks.fragments
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +55,8 @@ class ResultsFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(binding.resultsRecyclerView.context,
             DividerItemDecoration.VERTICAL)
 
+        dividerItemDecoration.setDrawable(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.white)))
+
         binding.resultsRecyclerView.addItemDecoration(dividerItemDecoration)
 
         // initialize percent label and income label to default values to show a temp value
@@ -61,7 +65,8 @@ class ResultsFragment : Fragment() {
         binding.netIncomeLabel.text = "0.0"
 
         viewModel.totalSum.observe(this.viewLifecycleOwner) {
-            binding.netIncomeLabel.text = it.toString()
+            val totalLabel = resources.getString(R.string.total) + " " + it.toString()
+            binding.netIncomeLabel.text = totalLabel
         }
 
         val sharedPref = activity?.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE) ?: return

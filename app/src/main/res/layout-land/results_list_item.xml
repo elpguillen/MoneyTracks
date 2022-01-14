@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_weight="2.2"
+        app:layout_constraintHorizontal_weight="1.2"
         tools:text="Date" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:gravity="start|center"
+        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@id/list_item_amount"
         app:layout_constraintStart_toEndOf="@+id/list_item_date"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/list_item_description"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_weight="1.7"
         tools:text="Amount" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

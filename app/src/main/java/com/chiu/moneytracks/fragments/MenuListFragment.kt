@@ -77,8 +77,6 @@ class MenuListFragment : Fragment() {
         binding.menuGridRecyclerView.adapter = menuAdapter
 
         InvConstants.menu.let { (binding.menuGridRecyclerView.adapter as MenuListAdapter).submitList(it) }
-
-        //addRandomItems()
     }
 
     /**

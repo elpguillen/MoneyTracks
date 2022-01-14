@@ -1,17 +1,20 @@
 package com.chiu.moneytracks.fragments
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chiu.moneytracks.IncomeApplication
 import com.chiu.moneytracks.IncomeViewModel
 import com.chiu.moneytracks.IncomeViewModelFactory
+import com.chiu.moneytracks.R
 import com.chiu.moneytracks.adapters.IncomeListAdapter
 import com.chiu.moneytracks.databinding.FragmentIncomeBinding
 
@@ -53,6 +56,8 @@ class IncomeFragment : Fragment() {
 
         val dividerItemDecoration = DividerItemDecoration(binding.incomeRecyclerView.context,
                                                             DividerItemDecoration.VERTICAL)
+
+        dividerItemDecoration.setDrawable(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.white)))
 
         binding.incomeRecyclerView.addItemDecoration(dividerItemDecoration)
 
